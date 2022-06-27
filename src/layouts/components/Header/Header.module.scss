@@ -1,6 +1,7 @@
 .wrapper{
     --search-border-radius: 92px;
     --search-height: 46px;
+    --search-width: 361px;
     --search-top-spacer: 9px;
     --search-button-width: 52px;
 
@@ -27,7 +28,7 @@
 
 .search{
     position: relative;
-    width: 361px;
+    width: var(--search-width);
     height: var(--search-height);
     border-radius: var(--search-border-radius);
     background-color:rgba(22, 24, 35, 0.06);
@@ -89,4 +90,15 @@
     &:active{
         background-color:rgba(22, 24, 35, 0.06) ;
     }
+}
+
+.search-title{
+    padding: 5px 12px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: rgba(22, 24, 35, 0.5);
+}
+.search-result{
+    width: var(--search-width);
+    
 }
