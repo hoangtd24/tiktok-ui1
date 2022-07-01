@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark, faMagnifyingGlass, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faCircleQuestion, faCircleXmark, faEarthAsia, faEllipsisVertical, faKeyboard, faMagnifyingGlass, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react/headless';
 
@@ -9,9 +9,25 @@ import { Wrapper as PoperWrapper } from '~/Poper';
 import AccountItem from '~/components/AccountItem';
 import Button from '~/components/Button';
 import { Plus } from '~/components/Icons';
+import Menu from '~/Poper/Menu';
 
 const cx = classNames.bind(styles);
 function Header() {
+    const MENU_ITEMS = [
+        {
+            icon: <FontAwesomeIcon icon = {faEarthAsia} />,
+            title: 'English'
+        },
+        {
+            icon: <FontAwesomeIcon icon = {faCircleQuestion} />,
+            title: 'Feedback and help',
+            to: '/feedback'
+        },
+        {
+            icon: <FontAwesomeIcon icon = {faKeyboard} />,
+            title: 'Keyboard shortcuts'
+        }
+    ]
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -50,6 +66,11 @@ function Header() {
                         Upload
                     </Button>
                     <Button primary>Log in</Button>
+                    <Menu items = {MENU_ITEMS}>
+                        <div className = {cx('more-btn')}>
+                            <FontAwesomeIcon icon = {faEllipsisVertical}/>
+                        </div>
+                    </Menu>
                 </div>
             </div>
         </header>
