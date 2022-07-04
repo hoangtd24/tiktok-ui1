@@ -19,7 +19,7 @@
 
 .inner{
     width: 1150px;
-    padding: 0 24px 0 20px;
+    padding: 0 24px ;
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -110,8 +110,9 @@
 }
 
 .more-btn{
-    margin-left: 28px;
+    margin-left: 20px;
     font-size: 2rem;
     background-color: transparent;
     padding: 4px 8px;
+    cursor: pointer;
 }

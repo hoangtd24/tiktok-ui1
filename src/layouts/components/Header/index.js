@@ -1,5 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleQuestion, faCircleXmark, faEarthAsia, faEllipsisVertical, faKeyboard, faMagnifyingGlass, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import {
+    faCircleQuestion,
+    faCircleXmark,
+    faEarthAsia,
+    faEllipsisVertical,
+    faKeyboard,
+    faMagnifyingGlass,
+    faSpinner,
+} from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react/headless';
 
@@ -13,21 +21,44 @@ import Menu from '~/Poper/Menu';
 
 const cx = classNames.bind(styles);
 function Header() {
+    const handleMenuChange = (menuItem) => {
+        console.log(menuItem)
+    }
     const MENU_ITEMS = [
         {
-            icon: <FontAwesomeIcon icon = {faEarthAsia} />,
-            title: 'English'
+            icon: <FontAwesomeIcon icon={faEarthAsia} />,
+            title: 'English',
+            children: {
+                title: 'Language',
+                data: [
+                    {
+                        type: 'language',
+                        title: 'Tiếng Việt',
+                        code: '34',
+                    },
+                    {
+                        type: 'language',
+                        title: 'English',
+                        code: '32',
+                    },
+                    {
+                        type: 'language',
+                        title: 'Tiếng Trung',
+                        code: '30',
+                    },
+                ],
+            },
         },
         {
-            icon: <FontAwesomeIcon icon = {faCircleQuestion} />,
+            icon: <FontAwesomeIcon icon={faCircleQuestion} />,
             title: 'Feedback and help',
-            to: '/feedback'
+            to: '/feedback',
         },
         {
-            icon: <FontAwesomeIcon icon = {faKeyboard} />,
-            title: 'Keyboard shortcuts'
-        }
-    ]
+            icon: <FontAwesomeIcon icon={faKeyboard} />,
+            title: 'Keyboard shortcuts',
+        },
+    ];
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -66,9 +97,9 @@ function Header() {
                         Upload
                     </Button>
                     <Button primary>Log in</Button>
-                    <Menu items = {MENU_ITEMS}>
-                        <div className = {cx('more-btn')}>
-                            <FontAwesomeIcon icon = {faEllipsisVertical}/>
+                    <Menu items={MENU_ITEMS} onChange = {handleMenuChange}>
+                        <div className={cx('more-btn')}>
+                            <FontAwesomeIcon icon={faEllipsisVertical} />
                         </div>
                     </Menu>
                 </div>
