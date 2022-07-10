@@ -116,3 +116,22 @@
     padding: 4px 8px;
     cursor: pointer;
 }
+
+.action-btn{
+    font-size: 2rem;
+    color: var(--text-color);
+    padding: 4px 10px;
+    cursor: pointer;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+}
+
+.user-avatar{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 12px;
+    cursor: pointer;
+}
