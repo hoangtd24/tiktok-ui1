@@ -7,7 +7,6 @@ import {
     faEllipsisVertical,
     faGear,
     faKeyboard,
-    faMagnifyingGlass,
     faSignOut,
     faSpinner,
     faUser,
@@ -22,9 +21,10 @@ import images from '~/assets/images';
 import { Wrapper as PoperWrapper } from '~/Poper';
 import AccountItem from '~/components/AccountItem';
 import Button from '~/components/Button';
-import { Message, Plus, Inbox } from '~/components/Icons';
+import { Message, Plus, Inbox, SearchIcon } from '~/components/Icons';
 import Menu from '~/Poper/Menu';
 import Image from '~/components/Image';
+import { useRef, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -66,10 +66,24 @@ const MENU_ITEMS = [
 
 function Header() {
     const currentUser = true;
+
+    const inputRef = useRef()
+
+    const [searchResult, setSearchResult] = useState()
+    const [showResult,setShowResult] = useState(true)
     const handleMenuChange = (menuItem) => {
         console.log(menuItem);
     };
 
+    const handleClear = () => {
+        setSearchResult('')
+        setShowResult(false)
+        inputRef.current.focus()
+    }
+
+    const handleClickOutside = () => {
+        setShowResult(false)
+    }
     const userMenu = [
         {
             icon: <FontAwesomeIcon icon={faUser} />,
@@ -102,10 +116,11 @@ function Header() {
                     <img src={images.logo} alt="TikTok" />
                 </div>
                 <HeadlessTippy
-                    visible={false}
+                    visible = {showResult && !!searchResult}
                     interactive
                     placement="bottom-start"
                     offset={[60, 4]}
+                    onClickOutside = {handleClickOutside}
                     render={(attrs) => (
                         <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                             <PoperWrapper>
@@ -118,13 +133,22 @@ function Header() {
                     )}
                 >
                     <div className={cx('search')}>
-                        <input placeholder="Search accounts and videos" spellCheck={false} />
-                        <button className={cx('clear')}>
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                        </button>
-                        <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
+                        <input 
+                            ref = {inputRef}
+                            value={searchResult}
+                            onChange = {(e) => setSearchResult(e.target.value)}
+                            onFocus = {() => setShowResult(true)}
+                            placeholder="Search accounts and videos" 
+                            spellCheck={false} 
+                        />
+                        {!!searchResult && 
+                            <button className={cx('clear')} onClick = {handleClear}>
+                                <FontAwesomeIcon icon={faCircleXmark} />
+                            </button>
+                        }
+                        {/* <FontAwesomeIcon className={cx('loading')} icon={faSpinner} /> */}
                         <button className={cx('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            <SearchIcon />
                         </button>
                     </div>
                 </HeadlessTippy>

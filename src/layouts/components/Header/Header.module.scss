@@ -75,6 +75,7 @@
     top: 50%;
     transform: translateY(-50%);
     right: calc(var(--search-button-width) + 16px);
+    color: rgba(22, 24, 35, 0.34);
 }
 .search-btn{
     width: var(--search-button-width);
