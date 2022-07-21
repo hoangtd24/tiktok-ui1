@@ -1,0 +1,94 @@
+.search{
+    position: relative;
+    width: var(--search-width);
+    height: var(--search-height);
+    border-radius: var(--search-border-radius);
+    background-color:rgba(22, 24, 35, 0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    padding-left: 16px;
+    border: 1.5px solid transparent;
+
+
+    input{
+        flex: 1;
+        font-size: 1.5rem;
+        background-color: transparent;
+        padding-right: 10px;
+        color: #3e3e3e;
+        height: 46px;
+        caret-color: var(--primary-color);
+    }
+
+    input:not(:placeholder-shown) ~ .search-btn{
+        color: rgba(22, 24, 35, 0.75);
+    }
+
+    &:focus-within{
+        border-color: rgba(22, 24, 35, 0.2)
+    }
+
+    &::before{
+        content:"";
+        display: block;
+        position: absolute;
+        width: 0.5px;
+        height: calc((var(--search-height) - var(--search-top-spacer)*2));
+        background-color: rgba(22, 24, 35, 0.12);
+        top: var(--search-top-spacer);
+        right: var(--search-button-width);
+    }
+}
+.clear,
+.loading{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: calc(var(--search-button-width) + 16px);
+    color: rgba(22, 24, 35, 0.34);
+}
+
+.loading{
+    animation: Spinner 1s linear infinite;
+}
+@keyframes Spinner {
+    from {
+        transform: translateY(-50%) rotate(0);
+    }
+    to{
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+.search-btn{
+    width: var(--search-button-width);
+    color: rgba(22, 24, 35, 0.34);
+    font-size: 1.8rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover{
+        cursor: pointer;
+        background-color:rgba(22, 24, 35, 0.03) ;
+    }
+
+    &:active{
+        background-color:rgba(22, 24, 35, 0.06) ;
+    }
+}
+
+.search-title{
+    padding: 5px 12px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: rgba(22, 24, 35, 0.5);
+}
+.search-result{
+    width: var(--search-width);
+    
+}

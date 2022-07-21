@@ -9,7 +9,7 @@ const publishRoutes = [
     {path: '/', conponent: Home},
     {path: '/following', conponent: Following},
     {path: '/live', conponent: Live},
-    {path: '/profile', conponent: Profile, layout: null},
+    {path: '/@:nickname', conponent: Profile},
     {path: '/upload', conponent: Upload, layout: HeaderOnly},
 ]
 

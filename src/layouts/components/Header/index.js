@@ -1,31 +1,25 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleQuestion,
-    faCircleXmark,
     faCoins,
     faEarthAsia,
     faEllipsisVertical,
     faGear,
     faKeyboard,
     faSignOut,
-    faSpinner,
     faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react';
-import HeadlessTippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
 
 import styles from './Header.module.scss';
 import images from '~/assets/images';
-import { Wrapper as PoperWrapper } from '~/Poper';
-import AccountItem from '~/components/AccountItem';
 import Button from '~/components/Button';
-import { Message, Plus, Inbox, SearchIcon } from '~/components/Icons';
+import { Message, Plus, Inbox,} from '~/components/Icons';
 import Menu from '~/Poper/Menu';
 import Image from '~/components/Image';
-import { useRef, useState } from 'react';
-
+import Search from '~/layouts/components/Search'
 const cx = classNames.bind(styles);
 
 const MENU_ITEMS = [
@@ -67,23 +61,10 @@ const MENU_ITEMS = [
 function Header() {
     const currentUser = true;
 
-    const inputRef = useRef()
-
-    const [searchResult, setSearchResult] = useState()
-    const [showResult,setShowResult] = useState(true)
     const handleMenuChange = (menuItem) => {
         console.log(menuItem);
     };
 
-    const handleClear = () => {
-        setSearchResult('')
-        setShowResult(false)
-        inputRef.current.focus()
-    }
-
-    const handleClickOutside = () => {
-        setShowResult(false)
-    }
     const userMenu = [
         {
             icon: <FontAwesomeIcon icon={faUser} />,
@@ -115,43 +96,7 @@ function Header() {
                 <div className={cx('logo')}>
                     <img src={images.logo} alt="TikTok" />
                 </div>
-                <HeadlessTippy
-                    visible = {showResult && !!searchResult}
-                    interactive
-                    placement="bottom-start"
-                    offset={[60, 4]}
-                    onClickOutside = {handleClickOutside}
-                    render={(attrs) => (
-                        <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                            <PoperWrapper>
-                                <h3 className={cx('search-title')}>Accounts</h3>
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                            </PoperWrapper>
-                        </div>
-                    )}
-                >
-                    <div className={cx('search')}>
-                        <input 
-                            ref = {inputRef}
-                            value={searchResult}
-                            onChange = {(e) => setSearchResult(e.target.value)}
-                            onFocus = {() => setShowResult(true)}
-                            placeholder="Search accounts and videos" 
-                            spellCheck={false} 
-                        />
-                        {!!searchResult && 
-                            <button className={cx('clear')} onClick = {handleClear}>
-                                <FontAwesomeIcon icon={faCircleXmark} />
-                            </button>
-                        }
-                        {/* <FontAwesomeIcon className={cx('loading')} icon={faSpinner} /> */}
-                        <button className={cx('search-btn')}>
-                            <SearchIcon />
-                        </button>
-                    </div>
-                </HeadlessTippy>
+                <Search />
                 <div className={cx('actions')}>
                     <Button outline leftIcon={<Plus />} className={cx('custom-upload')}>
                         Upload
