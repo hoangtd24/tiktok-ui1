@@ -10,6 +10,7 @@ import { Wrapper as PoperWrapper } from '~/Poper';
 import AccountItem from '~/components/AccountItem';
 import { SearchIcon } from '~/components/Icons';
 import { useDebounce } from '~/hooks';
+import { searchService } from '~/services/searchService';
 
 
 const cx = classNames.bind(styles);
@@ -29,14 +30,14 @@ function Search () {
             setSearchResult([])
             return
         }
-        setLoading(true)
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
-        .then(res => res.json())
-        .then(res => {
-            setSearchResult(res.data)
+        
+        const fetchApi = async () => {
+            setLoading(true)
+            const result = await searchService(debounced)
+            setSearchResult(result)
             setLoading(false)
-        })
-        .catch(() => setLoading(false))
+        }
+        fetchApi()
     },[debounced])
     const handleClear = () => {
         setSearchValue('')
